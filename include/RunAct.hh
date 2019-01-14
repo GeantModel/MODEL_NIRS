@@ -23,20 +23,41 @@ public:
     void EndOfRunAction(const G4Run *aRun);
 
     void AddEvent1(G4double energy1);
-
     void AddEvent2(G4double energy2);
+    void AddEvent3(G4double energy3);
+    void AddEvent4(G4double energy4);
+    void AddEvent5(G4double energy5);
+    void AddEvent6(G4double energy6);
+
+    G4double Sum =0;
+    G4double Sum1=0;
+    G4double Sum2=0;
+    G4double Sum3=0;
+    G4double Sum4=0;
+    G4double Sum5=0;
+    G4double Sum6=0;
+
+    G4double SVYAP  = 25000;
+    G4double SVLaBr = 63000;
+    G4double SVCeBr = 60000;
+    G4double SVLYSO = 25000;
+    G4double SVLSO  = 27000;
+    G4double SVLAO  = 10000;
 
     int nStep = 1000;
-    G4double Emax = 10.0*MeV;
-    double a = 1;
-    double b = 5;
+    G4double Emax = 2.0*MeV;
+   // double a = 1;
+   // double b = 5;
 
 
 private:
 
-    std::map <G4double, G4int> *result1;
-
-    std::map <G4double, G4int> *result2;
+    map <G4double, G4int> *result1;
+    map <G4double, G4int> *result2;
+    map <G4double, G4int> *result3;
+    map <G4double, G4int> *result4;
+    map <G4double, G4int> *result5;
+    map <G4double, G4int> *result6;
 
 };
 

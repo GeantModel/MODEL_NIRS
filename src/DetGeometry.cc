@@ -356,27 +356,88 @@ DetGeometry::~DetGeometry() {}
 G4VPhysicalVolume* DetGeometry::Construct(){
 
     G4Material *polystyrene = nist->FindOrBuildMaterial("G4_POLYSTYRENE");
-    G4Element *Y = nist->FindOrBuildElement("Y");
+
+    G4Element *Y  = nist->FindOrBuildElement("Y");
     G4Element *Al = nist->FindOrBuildElement("Al");
-    G4Element *O = nist->FindOrBuildElement("O");
+    G4Element *O  = nist->FindOrBuildElement("O");
+    G4Element *La = nist->FindOrBuildElement("La");
+    G4Element *Br = nist->FindOrBuildElement("Br");
+    G4Element *Ce = nist->FindOrBuildElement("Ce");
+    G4Element *Lu = nist->FindOrBuildElement("Lu");
+    G4Element *Si = nist->FindOrBuildElement("Si");
+
     G4Material *YAP = new G4Material("YAP", 5.37*g/cm3,3, kStateSolid);
     YAP->AddElement(Y,1);
     YAP->AddElement(Al,1);
     YAP->AddElement(O,3);
 
+    G4Material *LaBr = new G4Material("LaBr", 5.08*g/cm3,2, kStateSolid); //7.5 7.5
+    LaBr->AddElement(La,1);
+    LaBr->AddElement(Br,3);
+
+    G4Material *CeBr = new G4Material("CeBr", 5.1*g/cm3,2, kStateSolid);
+    CeBr->AddElement(Ce,1);
+    CeBr->AddElement(Br,3);
+
+    G4Material *LYSO = new G4Material("LYSO", 7.15*g/cm3,4, kStateSolid);
+    LYSO->AddElement(Lu,1);
+    LYSO->AddElement(Y,1);
+    LYSO->AddElement(Si,1);
+    LYSO->AddElement(O,5);
+
+    G4Material *LSO = new G4Material("LSO", 7.4*g/cm3,3, kStateSolid);
+    LSO->AddElement(Lu,2);
+    LSO->AddElement(Si,2);
+    LSO->AddElement(O,5);
+
+    G4Material *LAO = new G4Material("LAO", 8.3*g/cm3,3, kStateSolid);
+    LAO->AddElement(Lu,1);
+    LAO->AddElement(Al,1);
+    LAO->AddElement(O,3);
+
     std::ofstream fout("../material.txt");
     fout<<polystyrene<<'\n';
     fout<<YAP<<'\n';
+    fout<<LaBr<<'\n';
+    fout<<CeBr<<'\n';
+    fout<<LYSO<<'\n';
+    fout<<LSO<<'\n';
+    fout<<LAO<<'\n';
 
-    G4Tubs *scin_CH = new G4Tubs("scin_CH", 0, 2.5*cm, 5*cm, 0, 360*deg);
+  /*  G4Tubs *scin_CH = new G4Tubs("scin_CH", 0, 2.5*cm, 5*cm, 0, 360*deg);
     G4LogicalVolume *scin_CH_log = new G4LogicalVolume(scin_CH, polystyrene, "scin_CH_log");
     scin_CH_log->SetVisAttributes(G4Colour::Green());
-    new G4PVPlacement(new G4RotationMatrix(90*deg,90*deg,0),G4ThreeVector(10*cm,0,0),scin_CH_log,"scin_CH_PVP",logicWorld,false,0);
+    new G4PVPlacement(new G4RotationMatrix(90*deg,90*deg,0),G4ThreeVector(10*cm,0,0),scin_CH_log,"scin_CH_PVP",logicWorld,false,0);*/
 
-    G4Tubs *scin_YAP = new G4Tubs("scin_YAP", 0, 1.25*cm, 1.25*cm, 0, 360*deg);
+    G4Tubs *scin_YAP = new G4Tubs("scin_YAP", 0, 2.5*cm, 5*cm, 0, 360*deg);
     G4LogicalVolume *scin_YAP_log = new G4LogicalVolume(scin_YAP, YAP, "scin_YAP_log");
     scin_YAP_log->SetVisAttributes(G4Colour::Red());
-    new G4PVPlacement(new G4RotationMatrix(90*deg,90*deg,0),G4ThreeVector(-5.5*cm,0,0),scin_YAP_log,"scin_YAP_PVP",logicWorld,false,0);
+    new G4PVPlacement(new G4RotationMatrix(90*deg,90*deg,0),G4ThreeVector(35*cm,0,0),scin_YAP_log,"scin_YAP_PVP",logicWorld,false,0);
+
+    G4Tubs *scin_LaBr = new G4Tubs("scin_LaBr", 0, 2.5*cm, 3.75*cm, 0, 360*deg);
+    G4LogicalVolume *scin_LaBr_log = new G4LogicalVolume(scin_LaBr, LaBr, "scin_LaBr_log");
+    scin_LaBr_log->SetVisAttributes(G4Colour::Yellow());
+    new G4PVPlacement(new G4RotationMatrix(90*deg,90*deg,0),G4ThreeVector(-33.75*cm,0,0),scin_LaBr_log,"scin_LaBr_log",logicWorld,false,0);
+
+    G4Tubs *scin_CeBr = new G4Tubs("scin_CeBr", 0, 2.5*cm, 5*cm, 0, 360*deg);
+    G4LogicalVolume *scin_CeBr_log = new G4LogicalVolume(scin_CeBr, CeBr, "scin_CeBr_log");
+    scin_CeBr_log->SetVisAttributes(G4Colour::Green());
+    new G4PVPlacement(new G4RotationMatrix(0,90*deg,0),G4ThreeVector(0,35*cm,0),scin_CeBr_log,"scin_CeBr_PVP",logicWorld,false,0);
+
+    G4Tubs *scin_LYSO = new G4Tubs("scin_LYSO", 0, 2.5*cm, 5*cm, 0, 360*deg);
+    G4LogicalVolume *scin_LYSO_log = new G4LogicalVolume(scin_LYSO, LYSO, "scin_LYSO_log");
+    scin_LYSO_log->SetVisAttributes(G4Colour::Blue());
+    new G4PVPlacement(new G4RotationMatrix(0,90*deg,0),G4ThreeVector(0,-35*cm,0),scin_LYSO_log,"scin_LYSO_PVP",logicWorld,false,0);
+
+    G4Tubs *scin_LSO = new G4Tubs("scin_LSO", 0, 2.5*cm, 5*cm, 0, 360*deg);
+    G4LogicalVolume *scin_LSO_log = new G4LogicalVolume(scin_LSO, LSO, "scin_LSO_log");
+    scin_LSO_log->SetVisAttributes(G4Colour::Gray());
+    new G4PVPlacement(new G4RotationMatrix(90*deg,0,90*deg),G4ThreeVector(0,0,35*cm),scin_LSO_log,"scin_LSO_PVP",logicWorld,false,0);
+
+    G4Tubs *scin_LAO = new G4Tubs("scin_YAP", 0, 2.5*cm, 5*cm, 0, 360*deg);
+    G4LogicalVolume *scin_LAO_log = new G4LogicalVolume(scin_LAO, LAO, "scin_LAO_log");
+    scin_LAO_log->SetVisAttributes(G4Colour::Cyan());
+    new G4PVPlacement(new G4RotationMatrix(90*deg,0,90*deg),G4ThreeVector(0,0,-35*cm),scin_LAO_log,"scin_LAO_PVP",logicWorld,false,0);
 
     return physWorld;
 }

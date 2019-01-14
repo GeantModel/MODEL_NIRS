@@ -11,50 +11,116 @@ using namespace std;
 
 RunAct::RunAct()
 {
-    result1 = new std::map<G4double, G4int>;
-
-    result2 = new std::map<G4double, G4int>;
-
-
+    result1 = new map<G4double, G4int>;
+    result2 = new map<G4double, G4int>;
+    result3 = new map<G4double, G4int>;
+    result4 = new map<G4double, G4int>;
+    result5 = new map<G4double, G4int>;
+    result6 = new map<G4double, G4int>;
 }
 
 RunAct::~RunAct()
 {
     delete result1;
-
     delete result2;
-
-
+    delete result3;
+    delete result4;
+    delete result5;
+    delete result6;
 }
 
 void RunAct::BeginOfRunAction(const G4Run *aRun)
 {
     result1->clear();
-
-    for (int i=0; i <nStep; i++)
-        result1->insert(std::pair<G4double, G4int> (i *Emax / nStep, 0));
-
     result2->clear();
-    for (int i=0; i <nStep; i++)
-        result2->insert(std::pair<G4double, G4int> (i *Emax / nStep, 0));
+    result3->clear();
+    result4->clear();
+    result5->clear();
+    result6->clear();
 
+    Sum1=0;
+    Sum2=0;
+    Sum3=0;
+    Sum4=0;
+    Sum5=0;
+    Sum6=0;
 
+    for (int i=0; i <nStep; i++) result1->insert(std::pair<G4double, G4int> (i *Emax / nStep, 0));
+    for (int i=0; i <nStep; i++) result2->insert(std::pair<G4double, G4int> (i *Emax / nStep, 0));
+    for (int i=0; i <nStep; i++) result3->insert(std::pair<G4double, G4int> (i *Emax / nStep, 0));
+    for (int i=0; i <nStep; i++) result4->insert(std::pair<G4double, G4int> (i *Emax / nStep, 0));
+    for (int i=0; i <nStep; i++) result5->insert(std::pair<G4double, G4int> (i *Emax / nStep, 0));
+    for (int i=0; i <nStep; i++) result6->insert(std::pair<G4double, G4int> (i *Emax / nStep, 0));
 }
 
-void RunAct::EndOfRunAction(const G4Run *aRun)
-{
+void RunAct::EndOfRunAction(const G4Run *aRun) { //    fstream fout1("/mnt/hgfs/VMplayer/Test2/Source.txt", ios::out);
 
-//    fstream fout1("/mnt/hgfs/VMplayer/Test2/Source.txt", ios::out);
     fstream fout1("../YAP.txt", ios::out);
     for (auto it1: *result1)
         fout1 << it1.first << " " << it1.second << '\n';
     fout1.close();
 
-//    fstream fout2("/mnt/hgfs/VMplayer/Test2/Detector.txt", ios::out);
-    fstream fout2("../CH.txt", ios::out);
+    fstream fout2("../LaBr.txt", ios::out);
     for (auto it2: *result2)
         fout2 << it2.first << " " << it2.second << '\n';
     fout2.close();
+
+    fstream fout3("../CeBr.txt", ios::out);
+    for (auto it3: *result3)
+        fout3 << it3.first << " " << it3.second << '\n';
+    fout3.close();
+
+    fstream fout4("../LYSO.txt", ios::out);
+    for (auto it4: *result4)
+        fout4 << it4.first << " " << it4.second << '\n';
+    fout4.close();
+
+    fstream fout5("../LSO.txt", ios::out);
+    for (auto it5: *result5)
+        fout5 << it5.first << " " << it5.second << '\n';
+    fout5.close();
+
+    fstream fout6("../LAO.txt", ios::out);
+    for (auto it6: *result6)
+        fout6 << it6.first << " " << it6.second << '\n';
+    fout6.close();
+
+    fstream fout7("../ENERGY", ios::out);
+    fout7<<"ЭНЕРГОВЫДЕЛЕНИЕ, МЭВ__ СВЕТОВЫХОД ФОТОН "<<'\n';
+    fout7<<"YAP = " <<Sum1<<" МэВ,  "<<Sum1*SVYAP<<'\n';
+    fout7<<"LaBr = "<<Sum2<<" МэВ,  "<<Sum2*SVLaBr<<'\n';
+    fout7<<"CeBr = "<<Sum3<<" МэВ,  "<<Sum3*SVCeBr<<'\n';
+    fout7<<"LYSO = "<<Sum4<<" МэВ,  "<<Sum4*SVLYSO<<'\n';
+    fout7<<"LSO = " <<Sum5<<" МэВ,  "<<Sum5*SVLSO<<'\n';
+    fout7<<"LAO = " <<Sum6<<" МэВ,  "<<Sum6*SVLAO<<'\n';
+    fout7.close();
+}
+
+    void RunAct::AddEvent1(G4double energy1) {
+        auto it1 = result1->lower_bound(energy1);
+        Sum1+=energy1;
+        it1->second++; }
+    void RunAct::AddEvent2(G4double energy2) {
+        auto it2 = result2->lower_bound(energy2);
+        Sum2+=energy2;
+        it2->second++; }
+    void RunAct::AddEvent3(G4double energy3) {
+        auto it3 = result3->lower_bound(energy3);
+        Sum3+=energy3;
+        it3->second++; }
+    void RunAct::AddEvent4(G4double energy4) {
+        auto it4 = result4->lower_bound(energy4);
+        Sum4+=energy4;
+        it4->second++; }
+    void RunAct::AddEvent5(G4double energy5) {
+        auto it5 = result5->lower_bound(energy5);
+        Sum5+=energy5;
+        it5->second++; }
+    void RunAct::AddEvent6(G4double energy6) {
+        auto it6 = result6->lower_bound(energy6);
+        Sum6+=energy6;
+        it6->second++; }
+
 
 //    auto P1 = new double *[nStep];
 //    for (int i = 0; i < nStep; i++) {
@@ -67,9 +133,9 @@ void RunAct::EndOfRunAction(const G4Run *aRun)
 //    auto NormCounts = new double[nStep];
 //    auto NormCounts_1 = new double[nStep];
 
-    double E, Cnt;
+//   double E, Cnt;
 
-    double PI = 3.1415;
+//    double PI = 3.1415;
 
 //    ifstream infile1;
 //
@@ -159,19 +225,7 @@ void RunAct::EndOfRunAction(const G4Run *aRun)
 //    delete [] Sigma;
 
 
-}
 
-void RunAct::AddEvent1(G4double energy1)
-{
-    auto it1 = result1->lower_bound(energy1);
-    it1->second++;
-}
-
-void RunAct::AddEvent2(G4double energy2)
-{
-    auto it2 = result2->lower_bound(energy2);
-    it2->second++;
-}
 
 
 

@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 project(Test2)
 
 
-set(CMAKE_PREFIX_PATH /home/renat/Documents/geant4.10.4-build)
+set(CMAKE_PREFIX_PATH /home/student/geant4/geant4-install)
 
 option(WITH_GEANT4_UIVIS "Build project with Geant4 UI and Vis drivers" ON)
 if(WITH_GEANT4_UIVIS)

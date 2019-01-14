@@ -8,35 +8,36 @@ StepAct::StepAct(EventAct *eventAct):event(eventAct)
 
 }
 
-void StepAct::UserSteppingAction(const G4Step *aStep)
+void StepAct::UserSteppingAction(const G4Step *aStep) {
 
-{
-
-
-    if ( (aStep->GetTrack()->GetVolume()->GetLogicalVolume()->GetName() =="scin_YAP_log")
-
+//{
+//    if ( (aStep->GetTrack()->GetVolume()->GetLogicalVolume()->GetName() =="scin_YAP_log")
 //         &&
 //            (aStep->GetTrack()->GetParticleDefinition()->GetParticleName() == "gamma")
-            )
+//            )
+//    {
+//        event->AddEnDep1(aStep->GetTotalEnergyDeposit());
+//    };
 
-    {
+    if (aStep->GetTrack()->GetVolume()->GetLogicalVolume()->GetName() == "scin_YAP_log") {
         event->AddEnDep1(aStep->GetTotalEnergyDeposit());
     };
-
-
-
-
-    if
-    (
-    (aStep->GetTrack()->GetVolume()->GetLogicalVolume()->GetName() =="scin_CH_log")
-
-//     &&
-//
-//    (aStep->GetTrack()->GetParticleDefinition()->GetParticleName() == "gamma")
-
-    )
-    {
+    if (aStep->GetTrack()->GetVolume()->GetLogicalVolume()->GetName() == "scin_LaBr_log") {
         event->AddEnDep2(aStep->GetTotalEnergyDeposit());
+    };
+    if (aStep->GetTrack()->GetVolume()->GetLogicalVolume()->GetName() == "scin_CeBr_log") {
+        event->AddEnDep3(aStep->GetTotalEnergyDeposit());
+    };
+    if (aStep->GetTrack()->GetVolume()->GetLogicalVolume()->GetName() == "scin_LYSO_log") {
+        event->AddEnDep4(aStep->GetTotalEnergyDeposit());
+    };
+    if (aStep->GetTrack()->GetVolume()->GetLogicalVolume()->GetName() == "scin_LSO_log") {
+        event->AddEnDep5(aStep->GetTotalEnergyDeposit());
+    };
+    if (aStep->GetTrack()->GetVolume()->GetLogicalVolume()->GetName() == "scin_LAO_log") {
+        event->AddEnDep6(aStep->GetTotalEnergyDeposit());
+    };
+}
 
 
 //
@@ -51,10 +52,4 @@ void StepAct::UserSteppingAction(const G4Step *aStep)
 //        cout << "Total track energy " << aStep->GetTrack()->GetTotalEnergy()<< '\n';
 //        cout << '\n';
 
-
-    };
-
-
-
-}
 

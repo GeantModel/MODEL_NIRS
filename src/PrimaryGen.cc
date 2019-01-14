@@ -19,9 +19,8 @@ PrimaryGen::PrimaryGen()
 {
 
 
-    primarygenmessenger1 = new PrimaryGenMessenger1(this);
-    primarygenmessenger2 = new PrimaryGenMessenger2(this);
-
+    // primarygenmessenger1 = new PrimaryGenMessenger1(this);
+    // primarygenmessenger2 = new PrimaryGenMessenger2(this);
 
    gun = new G4ParticleGun(1);
    gun->SetParticleDefinition(G4Gamma::Gamma());
