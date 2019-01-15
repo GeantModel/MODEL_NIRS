@@ -25,6 +25,7 @@ public:
       void AddEnDep4 (G4double en4);
       void AddEnDep5 (G4double en5);
       void AddEnDep6 (G4double en6);
+      void AddEnDep7 (G4double en7);
 
 private:
       RunAct *run;
@@ -34,6 +35,7 @@ private:
       G4double EnergyDep4;
       G4double EnergyDep5;
       G4double EnergyDep6;
+      G4double EnergyDep7;
 
 };
 

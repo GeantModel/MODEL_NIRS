@@ -28,8 +28,9 @@ public:
     void AddEvent4(G4double energy4);
     void AddEvent5(G4double energy5);
     void AddEvent6(G4double energy6);
+    void AddEvent7(G4double energy7);
 
-    G4double Sum =0;
+    G4double Sum7 =0;
     G4double Sum1=0;
     G4double Sum2=0;
     G4double Sum3=0;
@@ -38,11 +39,12 @@ public:
     G4double Sum6=0;
 
     G4double SVYAP  = 25000;
-    G4double SVLaBr = 63000;
+    G4double SVLaBr = 73000;
     G4double SVCeBr = 60000;
     G4double SVLYSO = 25000;
     G4double SVLSO  = 27000;
     G4double SVLAO  = 10000;
+    G4double SVCH   = 12000;
 
     int nStep = 1000;
     G4double Emax = 2.0*MeV;
@@ -58,6 +60,7 @@ private:
     map <G4double, G4int> *result4;
     map <G4double, G4int> *result5;
     map <G4double, G4int> *result6;
+    map <G4double, G4int> *result7;
 
 };
 

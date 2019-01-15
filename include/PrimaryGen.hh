@@ -1,5 +1,5 @@
-//#define OuterSpectra
-#define SingleEnergy
+#define OuterSpectra
+//#define SingleEnergy
 
 #ifndef CPROJECT_PRIMARYGEN_HH
 #define CPROJECT_PRIMARYGEN_HH
@@ -69,7 +69,7 @@ private:
         Step = newValue;
     }
 
-    G4String outerspectrapath = "/home/renat/CLionProjects/Test2/TestSpectra.txt";
+    G4String outerspectrapath = "/home/student/CLionProjects/Test2_2/Co.txt";
 
     G4String theEnd = "gun.txt";
 

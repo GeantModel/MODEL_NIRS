@@ -37,6 +37,9 @@ void StepAct::UserSteppingAction(const G4Step *aStep) {
     if (aStep->GetTrack()->GetVolume()->GetLogicalVolume()->GetName() == "scin_LAO_log") {
         event->AddEnDep6(aStep->GetTotalEnergyDeposit());
     };
+    if (aStep->GetTrack()->GetVolume()->GetLogicalVolume()->GetName() == "scin_CH_log") {
+        event->AddEnDep7(aStep->GetTotalEnergyDeposit());
+    };
 }
 
 
